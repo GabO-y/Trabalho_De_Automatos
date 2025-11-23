@@ -1,0 +1,51 @@
+Cada grupo de até 6 alunos deverá desenvolver uma implementação dos seguintes procedimentos:
+
+1 - Autômatos Finitos Determinísticos (AFD) e Não Determinísticos (AFN) com Equivalência
+
+Implementação Base (AFD):
+
+Implementar a representação de um AFD.
+Implementar uma função que simule a execução do AFD, verificando se uma cadeia é ACEITA ou REJEITA.
+
+Implementação e Simulação (AFN):
+
+Implementar a representação de um AFN, incluindo suporte a não-determinismo e ligações lambdas.
+Implementar uma função que simule a execução do AFN (explorando todos os caminhos).
+
+Desafio Adicional (Conversão):
+
+Implementar o algoritmo de Conversão de AFN para AFD (método da construção do subconjunto).
+Validar o AFD resultante simulando uma cadeia.
+
+2 - Autômato a Pilha (AP) para Linguagens Livres de Contexto
+
+Implementação Base (APN):
+
+Implementar a representação de um Autômato a Pilha Não Determinístico (APN)).
+Incluir a estrutura de dados de Pilha e a lógica para as operações de empilhar, desempilhar e verificar o topo.
+
+Simulação e Aceitação:
+
+Implementar uma função que simule a execução do APN.
+
+A simulação deve considerar o estado atual, o símbolo de entrada, e o símbolo no topo da pilha para determinar a próxima transição e a operação na pilha.
+Verificar o reconhecimento por estado final e/ou pilha vazia.
+
+3 - Implementar uma Máquina de Turing (MT)
+
+Representação e Fita:
+
+Implementar a representação de uma Máquina de Turing (MT)
+Implementar a estrutura da fita infinita (ou suficientemente longa) e a movimentação da cabeça de leitura/escrita.
+
+Simulação Completa:
+
+Implementar a função de transição, simulando a mudança de estado, a escrita de símbolo e o movimento da cabeça (esquerda/direita).
+Simular a execução da MT, que deve parar ao atingir o estado de aceitação ou o estado de rejeição.
+
+Observações:
+
+Linguagem de Programação: O grupo pode utilizar qualquer linguagem de programação para implementar os autômatos e a máquina.
+Código Fonte Comentado: O código deve estar acompanhado de um relatório contendo a documentação.
+O grupo deve gravar (enviar o link do youtube) um vídeo de até 5 minutos apresentando a execução do código.
+Entrega: O grupo deverá entregar a implementação (código) e o relatório (documentação do código) até o dia 19.11.2025 via SIGAA.
