@@ -9,8 +9,8 @@ class SimuladorAFD:
         self.root.title("Simulador de Autômato Finito Determinístico (AFD)")
         self.root.geometry("1000x600")
 
-        # Variável para armazenar o AFD atual
-        self.afd = None
+        # Variável para armazenar o automato atual
+        self.automata = None
 
         self.criar_interface()
 

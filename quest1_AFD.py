@@ -60,12 +60,3 @@ class AFD:
 
 
 
-def main():
-    """Função principal que inicia a aplicação"""
-    root = tk.Tk()
-    app = SimuladorAFD(root)
-    root.mainloop()
-
-
-if __name__ == "__main__":
-    main()
