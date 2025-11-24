@@ -4,6 +4,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton
 from PyQt5.QtGui import QPainter, QColor, QPolygonF
 from PyQt5.QtCore import Qt, QPointF
+from PyQt5 import uic
 
 class Node:
 
@@ -357,6 +358,7 @@ class Board(QWidget):
         self.selected = b2
 
 app = QApplication(sys.argv)
-janela = Board()
+janela = uic.loadUi("main.ui")
 janela.show()
+app.exec_()
 sys.exit(app.exec_())
