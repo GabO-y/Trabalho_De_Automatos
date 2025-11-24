@@ -1,3 +1,4 @@
+import tkinter
 from quest1_AFD import *
 from interface import *
 
