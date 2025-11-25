@@ -1,5 +1,9 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, scrolledtext
+from typing import Optional
+
+from quest1_AFD import *
+from automata_protocol import *
 
 class SimuladorAFD:
     """Interface gráfica para simulação de AFD"""
@@ -7,10 +11,10 @@ class SimuladorAFD:
     def __init__(self, root):
         self.root = root
         self.root.title("Simulador de Autômato Finito Determinístico (AFD)")
-        self.root.geometry("1000x600")
+        self.root.geometry("1000x800")
 
         # Variável para armazenar o automato atual
-        self.automata = None
+        self.automata: Optional[Automata] = None
 
         self.criar_interface()
 
@@ -18,7 +22,7 @@ class SimuladorAFD:
         """Cria os componentes da interface gráfica"""
 
         # Frame principal
-        main_frame = ttk.Frame(self.root, padding="10")
+        main_frame = ttk.Frame(self.root, padding=(10))
         main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
         # Título
@@ -38,6 +42,7 @@ class SimuladorAFD:
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
         main_frame.columnconfigure(0, weight=1)
+        self.root.bind('<Escape>', lambda event: self.root.destroy())
 
     def criar_frame_entrada_afd(self, parent):
         """Cria o frame para entrada da definição do AFD"""
@@ -228,7 +233,7 @@ class SimuladorAFD:
                 transicoes[chave] = estado_destino
 
             # Cria o AFD
-            self.afd = AFD(estados, alfabeto, transicoes, estado_inicial, estados_finais)
+            self.automata = AFD(estados, alfabeto, transicoes, estado_inicial, estados_finais)
 
             messagebox.showinfo("Sucesso", "AFD criado com sucesso!")
 
@@ -239,7 +244,7 @@ class SimuladorAFD:
 
     def simular(self):
         """Executa a simulação do AFD com a cadeia fornecida"""
-        if self.afd is None:
+        if self.automata is None:
             messagebox.showwarning("Aviso", "Crie um AFD antes de simular!")
             return
 
@@ -250,7 +255,7 @@ class SimuladorAFD:
         self.resultado_text.delete(1.0, tk.END)
 
         # Executa o AFD
-        aceita, historico, erro = self.afd.processar_cadeia(cadeia)
+        aceita, historico, erro = self.automata.run(cadeia)
 
         # Exibe o resultado
         if cadeia == "":

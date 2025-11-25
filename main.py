@@ -1,6 +1,6 @@
 import tkinter
 from quest1_AFD import *
-from interface import *
+from gui import *
 
 
 def main():

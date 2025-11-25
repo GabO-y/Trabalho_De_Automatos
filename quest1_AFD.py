@@ -2,10 +2,11 @@ import tkinter as tk
 from tkinter import ttk, messagebox, scrolledtext
 import json
 
-from interface import *
+from gui import *
 
 
 class AFD:
+
     """
     Classe que representa um Autômato Finito Determinístico (AFD)
 
