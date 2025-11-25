@@ -11,10 +11,10 @@ class SimuladorAFD:
     def __init__(self, root):
         self.root = root
         self.root.title("Simulador de Autômato Finito Determinístico (AFD)")
-        self.root.geometry("1000x800")
+        self.root.geometry("1000x550")
 
         # Variável para armazenar o automato atual
-        self.automata: Optional[Automata] = None
+        self.automato_sel = tk.StringVar()
 
         self.criar_interface()
 
@@ -36,7 +36,7 @@ class SimuladorAFD:
         self.criar_frame_simulacao(main_frame)
 
         # Frame de resultado
-        self.criar_frame_resultado(main_frame)
+        #self.criar_frame_resultado(main_frame)
 
         # Configurar redimensionamento
         self.root.columnconfigure(0, weight=1)
@@ -49,40 +49,54 @@ class SimuladorAFD:
         frame = ttk.LabelFrame(parent, text="Definir AFD", padding="10")
         frame.grid(row=1, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
 
+        #automatos
+
+        automato = tk.StringVar()
+        ttk.Label(frame, text="Selecione o tipo de automato:").grid(row=0, column=0, sticky='w')
+        radio_frame = tk.Frame(frame)
+        radio_frame.grid(row=1, column=0, columnspan=1, sticky=tk.W, pady=2)
+        
+        # Radio buttons inside the radio_frame
+        ttk.Radiobutton(radio_frame, text="AFD", variable=self.automato_sel, value="AFD").grid(row=0, column=0, sticky='w', padx=5)
+        ttk.Radiobutton(radio_frame, text="AFN", variable=self.automato_sel, value="AFN").grid(row=1, column=0, sticky='w', padx=5)
+        ttk.Radiobutton(radio_frame, text="APD", variable=self.automato_sel, value="APD").grid(row=2, column=0, sticky='w', padx=5)
+        ttk.Radiobutton(radio_frame, text="Turing", variable=self.automato_sel, value="Turing").grid(row=3, column=0, sticky='w', padx=5)
+
+
         # Estados
-        ttk.Label(frame, text="Estados (separados por vírgula):").grid(row=0, column=0, sticky=tk.W, pady=5)
+        ttk.Label(frame, text="Estados (separados por vírgula):").grid(row=2, column=0, sticky=tk.W, pady=5)
         self.entrada_estados = ttk.Entry(frame, width=50)
-        self.entrada_estados.grid(row=0, column=1, padx=5, pady=5, sticky=(tk.W, tk.E))
+        self.entrada_estados.grid(row=2, column=1, padx=5, pady=5, sticky=(tk.W, tk.E))
         self.entrada_estados.insert(0, "q0,q1,q2")
 
         # Alfabeto
-        ttk.Label(frame, text="Alfabeto (separado por vírgula):").grid(row=1, column=0, sticky=tk.W, pady=5)
+        ttk.Label(frame, text="Alfabeto (separado por vírgula):").grid(row=3, column=0, sticky=tk.W, pady=5)
         self.entrada_alfabeto = ttk.Entry(frame, width=50)
-        self.entrada_alfabeto.grid(row=1, column=1, padx=5, pady=5, sticky=(tk.W, tk.E))
+        self.entrada_alfabeto.grid(row=3, column=1, padx=5, pady=5, sticky=(tk.W, tk.E))
         self.entrada_alfabeto.insert(0, "0,1")
 
         # Estado inicial
-        ttk.Label(frame, text="Estado Inicial:").grid(row=2, column=0, sticky=tk.W, pady=5)
+        ttk.Label(frame, text="Estado Inicial:").grid(row=4, column=0, sticky=tk.W, pady=5)
         self.entrada_estado_inicial = ttk.Entry(frame, width=50)
-        self.entrada_estado_inicial.grid(row=2, column=1, padx=5, pady=5, sticky=(tk.W, tk.E))
+        self.entrada_estado_inicial.grid(row=4, column=1, padx=5, pady=5, sticky=(tk.W, tk.E))
         self.entrada_estado_inicial.insert(0, "q0")
 
         # Estados finais
-        ttk.Label(frame, text="Estados Finais (separados por vírgula):").grid(row=3, column=0, sticky=tk.W, pady=5)
+        ttk.Label(frame, text="Estados Finais (separados por vírgula):").grid(row=5, column=0, sticky=tk.W, pady=5)
         self.entrada_estados_finais = ttk.Entry(frame, width=50)
-        self.entrada_estados_finais.grid(row=3, column=1, padx=5, pady=5, sticky=(tk.W, tk.E))
+        self.entrada_estados_finais.grid(row=5, column=1, padx=5, pady=5, sticky=(tk.W, tk.E))
         self.entrada_estados_finais.insert(0, "q2")
 
         # Transições
-        ttk.Label(frame, text="Transições (formato: estado,simbolo,destino):").grid(row=4, column=0, sticky=tk.W,
+        ttk.Label(frame, text="Transições (formato: estado,simbolo,destino):").grid(row=6, column=0, sticky=tk.W,
                                                                                     pady=5)
         self.entrada_transicoes = scrolledtext.ScrolledText(frame, height=6, width=50, wrap=tk.WORD)
-        self.entrada_transicoes.grid(row=4, column=1, padx=5, pady=5, sticky=(tk.W, tk.E))
+        self.entrada_transicoes.grid(row=6, column=1, padx=5, pady=5, sticky=(tk.W, tk.E))
         self.entrada_transicoes.insert(1.0, "q0,0,q1\nq0,1,q0\nq1,0,q1\nq1,1,q2\nq2,0,q1\nq2,1,q0")
 
         # Botões
         btn_frame = ttk.Frame(frame)
-        btn_frame.grid(row=5, column=0, columnspan=2, pady=10)
+        btn_frame.grid(row=7, column=0, columnspan=2, pady=10)
 
         ttk.Button(btn_frame, text="Criar AFD", command=self.criar_afd).pack(side=tk.LEFT, padx=5)
         ttk.Button(btn_frame, text="Exemplo 1 (termina em 01)", command=self.carregar_exemplo1).pack(side=tk.LEFT,
@@ -95,7 +109,7 @@ class SimuladorAFD:
     def criar_frame_simulacao(self, parent):
         """Cria o frame para entrada e simulação"""
         frame = ttk.LabelFrame(parent, text="Simulação", padding="10")
-        frame.grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
+        frame.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
 
         # Label e entrada de cadeia
         ttk.Label(frame, text="Digite a cadeia:").grid(row=0, column=0, sticky=tk.W, pady=5)
@@ -255,7 +269,7 @@ class SimuladorAFD:
         self.resultado_text.delete(1.0, tk.END)
 
         # Executa o AFD
-        aceita, historico, erro = self.automata.run(cadeia)
+        aceita = self.automata.run(cadeia)
 
         # Exibe o resultado
         if cadeia == "":
@@ -264,18 +278,21 @@ class SimuladorAFD:
             self.resultado_text.insert(tk.END, f"Cadeia: '{cadeia}'\n", "titulo")
         self.resultado_text.insert(tk.END, f"Tamanho: {len(cadeia)}\n\n", "titulo")
 
-        if erro:
-            self.resultado_text.insert(tk.END, f"ERRO: {erro}\n", "rejeita")
-        else:
+#        if erro:
+#            self.resultado_text.insert(tk.END, f"ERRO: {erro}\n", "rejeita")
             # Resultado final
-            estado_final = historico[-1][2]
+            #estado_final = historico[-1][2]
 
-            if aceita:
-                self.resultado_text.insert(tk.END,
-                                           f"ACEITA\nEstado final: '{estado_final}'\n", "aceita")
-            else:
-                self.resultado_text.insert(tk.END,
-                                           f"REJEITA\nEstado final: '{estado_final}'\n", "rejeita")
+        if aceita:
+            #self.resultado_text.insert(tk.END,
+            #                           f"ACEITA\nEstado final: '{estado_final}'\n", "aceita")
+            messagebox.showinfo("Resultado", "Cadeia aceita")
+
+        else:
+            #self.resultado_text.insert(tk.END,
+            #                           f"REJEITA\nEstado final: '{estado_final}'\n", "rejeita")
+            
+            messagebox.showinfo("Resultado", "Cadeia rejeitada")
 
         self.resultado_text.config(state=tk.DISABLED)
 
