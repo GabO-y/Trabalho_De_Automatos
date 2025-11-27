@@ -4,9 +4,8 @@ from gui import *
 
 
 def main():
-    """Função principal que inicia a aplicação"""
     root = tk.Tk()
-    app = SimuladorAFD(root)
+    app = SimuladorAutomatos(root)
     root.mainloop()
 
 
