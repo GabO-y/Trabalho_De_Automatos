@@ -89,7 +89,7 @@ class AFD(AutomatoBase):
         for i, simbolo in enumerate(cadeia):
             # Validar se o símbolo está no alfabeto
             if simbolo not in self.alfabeto:
-                self.historico.append(f"\n❌ Erro: Símbolo '{simbolo}' não está no alfabeto")
+                self.historico.append(f"\n Erro: Símbolo '{simbolo}' não está no alfabeto")
                 self.historico.append(f"Alfabeto válido: {self.alfabeto}")
                 return False, self.historico
 
@@ -97,7 +97,7 @@ class AFD(AutomatoBase):
             chave = (estado_atual, simbolo)
             if chave not in self.transicoes:
                 self.historico.append(f"\nPasso {i + 1}: δ({estado_atual}, '{simbolo}') = indefinida")
-                self.historico.append(f"❌ Cadeia REJEITADA - Transição não definida para '{simbolo}'")
+                self.historico.append(f" Cadeia REJEITADA - Transição não definida para '{simbolo}'")
                 return False, self.historico
 
             # Executar transição
@@ -110,9 +110,9 @@ class AFD(AutomatoBase):
         aceita = estado_atual in self.estados_finais
 
         if aceita:
-            self.historico.append("✓ Resultado: CADEIA ACEITA")
+            self.historico.append("Resultado: CADEIA ACEITA")
         else:
-            self.historico.append("✗ Resultado: CADEIA REJEITADA")
+            self.historico.append("Resultado: CADEIA REJEITADA")
 
         return aceita, self.historico
 

@@ -114,7 +114,7 @@ class AFN(AutomatoBase):
         for i, simbolo in enumerate(cadeia):
             # Validar se o símbolo está no alfabeto
             if simbolo not in self.alfabeto:
-                self.historico.append(f"\n❌ Erro: Símbolo '{simbolo}' não está no alfabeto")
+                self.historico.append(f"\n Erro: Símbolo '{simbolo}' não está no alfabeto")
                 return False, self.historico
 
             # Encontrar todos os próximos estados possíveis
@@ -128,7 +128,7 @@ class AFN(AutomatoBase):
             if not proximos_estados:
                 self.historico.append(
                     f"\nPasso {i + 1}: Nenhuma transição para '{simbolo}' a partir de {estados_atuais}")
-                self.historico.append("❌ Cadeia REJEITADA")
+                self.historico.append("Cadeia REJEITADA")
                 return False, self.historico
 
             # Aplicar ε-fecho ao conjunto de próximos estados
@@ -142,9 +142,9 @@ class AFN(AutomatoBase):
         aceita = bool(estados_finais_alcancados)
 
         if aceita:
-            self.historico.append("✓ Resultado: CADEIA ACEITA")
+            self.historico.append("Resultado: CADEIA ACEITA")
         else:
-            self.historico.append("✗ Resultado: CADEIA REJEITADA")
+            self.historico.append("Resultado: CADEIA REJEITADA")
 
         return aceita, self.historico
 

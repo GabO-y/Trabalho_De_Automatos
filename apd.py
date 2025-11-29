@@ -93,7 +93,7 @@ class APD(AutomatoBase):
                 self.historico.append(f"  Estado: {estado_atual}")
                 self.historico.append(f"  Entrada: '{simbolo_entrada if simbolo_entrada else 'ε'}'")
                 self.historico.append(f"  Topo pilha: {simbolo_pilha}")
-                self.historico.append("❌ Cadeia REJEITADA")
+                self.historico.append(" Cadeia REJEITADA")
                 return False, self.historico
 
             # Executar primeira transição possível (não-determinismo)
@@ -132,9 +132,9 @@ class APD(AutomatoBase):
         aceita = (estado_atual in self.estados_finais) or (len(pilha) == 0)
 
         if aceita:
-            self.historico.append("✓ Resultado: CADEIA ACEITA")
+            self.historico.append("Resultado: CADEIA ACEITA")
         else:
-            self.historico.append("✗ Resultado: CADEIA REJEITADA")
+            self.historico.append("Resultado: CADEIA REJEITADA")
 
         return aceita, self.historico
 
