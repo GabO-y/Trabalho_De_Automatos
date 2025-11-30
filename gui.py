@@ -190,7 +190,7 @@ class SimuladorAutomatos:
             self.entrada_alfabeto.insert(0, "a,b")
             self.entrada_estado_inicial.insert(0, "q0")
             self.entrada_estados_finais.insert(0, "q2")
-            self.entrada_transicoes.insert(1.0, "q0,a,Z,q0,aZ\nq0,b,a,q1,\nq1,b,a,q1,\nq1,,Z,q2,Z")
+            self.entrada_transicoes.insert(1.0, "q0,a,Z,q0,Za\nq0,a,a,q0,aa,\nq0,b,a,q1,\nq1,b,a,q1,\nq1,,Z,q2,Z")
 
     def criar_automato(self):
         """Cria o automato selecionado"""
