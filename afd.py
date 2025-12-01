@@ -18,7 +18,7 @@ class AFD(AutomatoBase):
         - Para cada (estado, símbolo), há apenas uma transição
         - Sem ε-transições (transições vazias)
         - Função de transição total ou parcial
-
+S
     Atributos:
         transicoes (Dict): Mapeamento (estado, símbolo) -> próximo_estado
     """

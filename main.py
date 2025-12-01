@@ -1,11 +1,10 @@
 import tkinter
-from quest1_AFD import *
 from gui import *
 
 
 def main():
     root = tk.Tk()
-    app = SimuladorAutomatos(root)
+    SimuladorAutomatos(root)
     root.mainloop()
 
 

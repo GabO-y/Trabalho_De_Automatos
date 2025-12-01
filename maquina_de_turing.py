@@ -241,7 +241,7 @@ class SimuladorMaquinaTuring:
         ttk.Label(frame, text="Q - Estados (separados por virgula):").grid(row=0, column=0, sticky=tk.W, pady=5)
         self.entrada_Q = ttk.Entry(frame, width=60)
         self.entrada_Q.grid(row=0, column=1, padx=5, pady=5, sticky=(tk.W, tk.E))
-        self.entrada_Q.insert(0, "q0,q1,q2,q3")
+        self.entrada_Q.insert(0, "q0,q1,q2")
 
         ttk.Label(frame, text="Sigma - Alfabeto de Entrada (separado por virgula):").grid(row=1, column=0, sticky=tk.W, pady=5)
         self.entrada_Sigma = ttk.Entry(frame, width=60)
@@ -261,7 +261,7 @@ class SimuladorMaquinaTuring:
         ttk.Label(frame, text="F - Estados Finais de Aceitacao (separados por virgula):").grid(row=4, column=0, sticky=tk.W, pady=5)
         self.entrada_F = ttk.Entry(frame, width=60)
         self.entrada_F.grid(row=4, column=1, padx=5, pady=5, sticky=(tk.W, tk.E))
-        self.entrada_F.insert(0, "q3")
+        self.entrada_F.insert(0, "q2")
 
         ttk.Label(frame, text="delta - Funcao de Transicao: delta: Q x Gamma -> Q x Gamma x {L, R}").grid(row=5, column=0, sticky=tk.NW, pady=5)
         ttk.Label(frame, text="(formato: estado,simbolo,novo_estado,novo_simbolo,direcao)", font=("Arial", 8)).grid(row=5, column=1, sticky=tk.W, pady=2)
@@ -269,14 +269,14 @@ class SimuladorMaquinaTuring:
         self.entrada_delta = scrolledtext.ScrolledText(frame, height=7, width=70, wrap=tk.WORD)
         self.entrada_delta.grid(row=6, column=1, padx=5, pady=5, sticky=(tk.W, tk.E))
         self.entrada_delta.insert(1.0,
-            "q0,a,q1,a,R\nq1,a,q1,a,R\nq1,b,q2,b,R\nq2,b,q2,b,R\nq2,_,q3,_,L")
+            "q0,a,q0,a,R\nq0,b,q1,b,R\nq0,_,q2,_,R\nq1,b,q1,b,R\nq1,_,q2,_,R")
 
         btn_frame = ttk.Frame(frame)
         btn_frame.grid(row=7, column=0, columnspan=2, pady=10)
 
         ttk.Button(btn_frame, text="Criar MT", command=self.criar_mt).pack(side=tk.LEFT, padx=5)
         ttk.Button(btn_frame, text="Exemplo 1 (a*b*)", command=self.carregar_exemplo1).pack(side=tk.LEFT, padx=5)
-        ttk.Button(btn_frame, text="Exemplo 2 (reconhece 0*)", command=self.carregar_exemplo2).pack(side=tk.LEFT, padx=5)
+        ttk.Button(btn_frame, text="Exemplo 2 (0*)", command=self.carregar_exemplo2).pack(side=tk.LEFT, padx=5)
 
         frame.columnconfigure(1, weight=1)
 
@@ -360,7 +360,7 @@ class SimuladorMaquinaTuring:
     def carregar_exemplo1(self):
         """Carrega exemplo 1: reconhece a*b*"""
         self.entrada_Q.delete(0, tk.END)
-        self.entrada_Q.insert(0, "q0,q1,q2,q3")
+        self.entrada_Q.insert(0, "q0,q1,q2")
         self.entrada_Sigma.delete(0, tk.END)
         self.entrada_Sigma.insert(0, "a,b")
         self.entrada_Gamma.delete(0, tk.END)
@@ -368,10 +368,10 @@ class SimuladorMaquinaTuring:
         self.entrada_q0.delete(0, tk.END)
         self.entrada_q0.insert(0, "q0")
         self.entrada_F.delete(0, tk.END)
-        self.entrada_F.insert(0, "q3")
+        self.entrada_F.insert(0, "q2")
         self.entrada_delta.delete(1.0, tk.END)
         self.entrada_delta.insert(1.0,
-            "q0,a,q0,a,R\nq0,b,q1,b,R\nq0,_,q3,_,L\nq1,b,q1,b,R\nq1,_,q3,_,L")
+            "q0,a,q0,a,R\nq0,b,q1,b,R\nq0,_,q2,_,R\nq1,b,q1,b,R\nq1,_,q2,_,R")
 
     def carregar_exemplo2(self):
         """Carrega exemplo 2: reconhece 0*"""

@@ -1,6 +1,5 @@
 """
-Interface grafica para o Simulador de Automatos
-
+Interface grafica
 Permite criar e simular diferentes tipos de automatos (AFD, AFN, APD).
 """
 

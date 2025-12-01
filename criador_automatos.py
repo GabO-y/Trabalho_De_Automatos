@@ -1,4 +1,3 @@
-# ============== criador_automatos.py ==============
 """
 Módulo para criação de autômatos a partir de entrada do usuário
 
